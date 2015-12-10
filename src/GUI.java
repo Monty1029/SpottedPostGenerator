@@ -25,7 +25,7 @@ public class GUI {
 		pane.add(textArea);
 		pane.add(generateButton);
 		frame.setVisible(true);
-		frame.setSize(350, 150);
+		frame.setSize(400, 150);
 	}
 	
 	public void createAndShowGUI() {

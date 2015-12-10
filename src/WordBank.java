@@ -51,6 +51,16 @@ public class WordBank {
 		}
 	};
 	
+	private enum Day {
+		MON("Monday"), TUE("Tuesday"), WED("Wednesday"), THU("Thursday"), FRI("Friday"), SAT("Saturday"), SUN("Sunday");
+		
+		private String day;
+		
+		private Day(String day) {
+			this.day = day;
+		}
+	};
+	
 	private enum Color {
 		RED("red"), GREEN("green"), BLUE("blue"), PINK("pink"), YELLOW("yellow"), BROWN("brown"), PURPLE("purple"), 
 		ORANGE("orange"), BLACK("black"), GREY("grey");
@@ -73,7 +83,7 @@ public class WordBank {
 	};
 	
 	private enum Phrase {
-		MARRY("marry me please"), DATE("please go out with me"), BAE("be my bae"), CUTE("you're cute"),
+		MARRY("marry me please"), DATE("please go out with me"), BAE("please be my bae"), CUTE("you're cute"),
 		NUMBER("can I get your number"), HOOK("let's hook up");
 		
 		private String phrase;
@@ -98,29 +108,44 @@ public class WordBank {
 		String randomGender = Gender.values()[random.nextInt(Gender.values().length)].gender;
 		String randomLocation = Location.values()[random.nextInt(Location.values().length)].location;
 		String randomCourse = Course.values()[random.nextInt(Course.values().length)].course;
+		String randomDay = Day.values()[random.nextInt(Day.values().length)].day;
 		String randomColor = Color.values()[random.nextInt(Color.values().length)].color;
 		String randomObject = Object.values()[random.nextInt(Object.values().length)].object;
 		String randomPhrase = Phrase.values()[random.nextInt(Phrase.values().length)].phrase;
 		String randomPoster = Poster.values()[random.nextInt(Poster.values().length)].poster;
-		if (swap) {
-			generateV1(randomGender, randomLocation, randomColor, randomObject, randomPhrase, randomPoster);
+		int randomHour = 1 + random.nextInt(11);
+		int randomMinute = 0 + random.nextInt(59);
+		String hour = Integer.toString(randomHour);
+		String minute = "";
+		if (randomMinute < 10) {
+			minute = "0" + Integer.toString(randomMinute);
 		}
 		else {
-			generateV2(randomGender, randomCourse, randomColor, randomObject, randomPhrase, randomPoster);
+			minute = Integer.toString(randomMinute);
+		}
+		if (swap) {
+			generateV1(randomGender, randomLocation, randomDay, hour, minute, 
+					randomColor, randomObject, randomPhrase, randomPoster);
+		}
+		else {
+			generateV2(randomGender, randomCourse, randomDay, hour, minute, 
+					randomColor, randomObject, randomPhrase, randomPoster);
 		}
 	}
 	
-	public void generateV1(String randomGender, String randomLocation, String randomColor, String randomObject, 
-			String randomPhrase, String randomPoster) {
-		g.getTextArea().setText("To the " + randomGender + " at " + randomLocation + " with the \n" + randomColor + " "
+	public void generateV1(String randomGender, String randomLocation, String randomDay, String hour, String minute, 
+			String randomColor, String randomObject, String randomPhrase, String randomPoster) {
+		g.getTextArea().setText("To the " + randomGender + " at " + randomLocation + " on " + randomDay + " last week\n at "
+				+ hour + ":" + minute + " with the " + randomColor + " "
 				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
 				+ " " + randomObject);
 		swap = false;
 	}
 	
-	public void generateV2(String randomGender, String randomCourse, String randomColor, String randomObject, 
-			String randomPhrase, String randomPoster) {
-		g.getTextArea().setText("To the " + randomGender + " in my " + randomCourse + " class with the \n" + randomColor + " "
+	public void generateV2(String randomGender, String randomCourse, String randomDay, String hour, String minute, 
+			String randomColor, String randomObject, String randomPhrase, String randomPoster) {
+		g.getTextArea().setText("To the " + randomGender + " in my " + randomCourse + " on " + randomDay + " last week\n at "
+				+ hour + ":" + minute + " with the " + randomColor + " "
 				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
 				+ " " + randomObject);
 		swap = true;

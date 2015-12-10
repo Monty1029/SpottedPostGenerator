@@ -3,9 +3,11 @@ import java.util.*;
 public class WordBank {
 	
 	private GUI g;
+	private boolean swap;
 	
 	public WordBank() {
 		g = new GUI(this);
+		swap = false;
 	}
 	
 	private enum Gender {
@@ -72,7 +74,7 @@ public class WordBank {
 	
 	private enum Phrase {
 		MARRY("marry me please"), DATE("please go out with me"), BAE("be my bae"), CUTE("you're cute"),
-		NUMBER("can I get your number");
+		NUMBER("can I get your number"), HOOK("let's hook up");
 		
 		private String phrase;
 		
@@ -95,13 +97,33 @@ public class WordBank {
 		Random random = new Random();
 		String randomGender = Gender.values()[random.nextInt(Gender.values().length)].gender;
 		String randomLocation = Location.values()[random.nextInt(Location.values().length)].location;
+		String randomCourse = Course.values()[random.nextInt(Course.values().length)].course;
 		String randomColor = Color.values()[random.nextInt(Color.values().length)].color;
 		String randomObject = Object.values()[random.nextInt(Object.values().length)].object;
 		String randomPhrase = Phrase.values()[random.nextInt(Phrase.values().length)].phrase;
 		String randomPoster = Poster.values()[random.nextInt(Poster.values().length)].poster;
-		g.getTextArea().setText("To the " + randomGender + " at " + randomLocation + " with the " + randomColor + " "
-				+ randomObject + ", " + randomPhrase + "\n - The shy " + randomPoster + " with the " + randomColor
+		if (swap) {
+			generateV1(randomGender, randomLocation, randomColor, randomObject, randomPhrase, randomPoster);
+		}
+		else {
+			generateV2(randomGender, randomCourse, randomColor, randomObject, randomPhrase, randomPoster);
+		}
+	}
+	
+	public void generateV1(String randomGender, String randomLocation, String randomColor, String randomObject, 
+			String randomPhrase, String randomPoster) {
+		g.getTextArea().setText("To the " + randomGender + " at " + randomLocation + " with the \n" + randomColor + " "
+				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
 				+ " " + randomObject);
+		swap = false;
+	}
+	
+	public void generateV2(String randomGender, String randomCourse, String randomColor, String randomObject, 
+			String randomPhrase, String randomPoster) {
+		g.getTextArea().setText("To the " + randomGender + " in my " + randomCourse + " class with the \n" + randomColor + " "
+				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
+				+ " " + randomObject);
+		swap = true;
 	}
 	
 	public static void main(String[] args) {

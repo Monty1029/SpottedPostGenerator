@@ -111,6 +111,8 @@ public class WordBank {
 		String randomDay = Day.values()[random.nextInt(Day.values().length)].day;
 		String randomColor = Color.values()[random.nextInt(Color.values().length)].color;
 		String randomObject = Object.values()[random.nextInt(Object.values().length)].object;
+		String randomColor2 = Color.values()[random.nextInt(Color.values().length)].color;
+		String randomObject2 = Object.values()[random.nextInt(Object.values().length)].object;
 		String randomPhrase = Phrase.values()[random.nextInt(Phrase.values().length)].phrase;
 		String randomPoster = Poster.values()[random.nextInt(Poster.values().length)].poster;
 		int randomHour = 1 + random.nextInt(11);
@@ -125,29 +127,29 @@ public class WordBank {
 		}
 		if (swap) {
 			generateV1(randomGender, randomLocation, randomDay, hour, minute, 
-					randomColor, randomObject, randomPhrase, randomPoster);
+					randomColor, randomObject, randomPhrase, randomPoster, randomColor2, randomObject2);
 		}
 		else {
 			generateV2(randomGender, randomCourse, randomDay, hour, minute, 
-					randomColor, randomObject, randomPhrase, randomPoster);
+					randomColor, randomObject, randomPhrase, randomPoster, randomColor2, randomObject2);
 		}
 	}
 	
 	public void generateV1(String randomGender, String randomLocation, String randomDay, String hour, String minute, 
-			String randomColor, String randomObject, String randomPhrase, String randomPoster) {
+			String randomColor, String randomObject, String randomPhrase, String randomPoster, String randomColor2, String randomObject2) {
 		g.getTextArea().setText("To the " + randomGender + " at " + randomLocation + " on " + randomDay + " last week\n at "
 				+ hour + ":" + minute + " with the " + randomColor + " "
-				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
-				+ " " + randomObject);
+				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor2
+				+ " " + randomObject2);
 		swap = false;
 	}
 	
 	public void generateV2(String randomGender, String randomCourse, String randomDay, String hour, String minute, 
-			String randomColor, String randomObject, String randomPhrase, String randomPoster) {
-		g.getTextArea().setText("To the " + randomGender + " in my " + randomCourse + " on " + randomDay + " last week\n at "
+			String randomColor, String randomObject, String randomPhrase, String randomPoster, String randomColor2, String randomObject2) {
+		g.getTextArea().setText("To the " + randomGender + " in my " + randomCourse + " class on " + randomDay + " last week\n at "
 				+ hour + ":" + minute + " with the " + randomColor + " "
-				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor
-				+ " " + randomObject);
+				+ randomObject + ", " + randomPhrase + "\n      - The shy " + randomPoster + " with the " + randomColor2
+				+ " " + randomObject2);
 		swap = true;
 	}
 	
